@@ -1,0 +1,11 @@
+:root {
+  --primary-color: #00695c;       /* اللون الرئيسي */
+  --secondary-color: #00bfa5;     /* لون مساعد */
+  --text-color: #333333;          /* لون النص */
+  --background-color: #fafafa;    /* خلفية عامة */
+  --white: #ffffff;
+  --dark: #1e1e1e;
+  --gray: #888;
+  --light-gray: #f2f2f2;
+  --accent: #ff5722;              /* لون إضافي */
+}

@@ -1,0 +1,43 @@
+{
+  "name": "Emerald Pro",
+  "version": "1.0.0",
+  "author": "YourBrand",
+  "description": "ثيم احترافي متعدد الصفحات متجاوب بالكامل ومخصص لمنصة سلة. يحتوي على صفحة رئيسية، منتجات، سلة، ودفع.",
+  "settings": [
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "اللون الرئيسي",
+      "default": "#00695c",
+      "css_variable": "--primary-color"
+    },
+    {
+      "type": "color",
+      "id": "secondary_color",
+      "label": "اللون الثانوي",
+      "default": "#00bfa5",
+      "css_variable": "--secondary-color"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "لون إضافي",
+      "default": "#ff5722",
+      "css_variable": "--accent"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "لون النص",
+      "default": "#333333",
+      "css_variable": "--text-color"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "لون الخلفية",
+      "default": "#fafafa",
+      "css_variable": "--background-color"
+    }
+  ]
+}

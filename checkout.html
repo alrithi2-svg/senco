@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>الدفع | متجري</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- الخطوط والتصميم -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- رأس الصفحة -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">متجري</a>
+      <nav class="navbar">
+        <a href="index.html">الرئيسية</a>
+        <a href="product.html">المنتجات</a>
+        <a href="cart.html">السلة</a>
+        <a href="checkout.html">الدفع</a>
+      </nav>
+      <div class="cart-icon">🛒</div>
+    </div>
+  </header>
+
+  <!-- الدفع -->
+  <main class="container checkout-page">
+    <h1>📦 معلومات الشحن والدفع</h1>
+
+    <form id="checkoutForm" class="checkout-form">
+      <div class="form-group">
+        <label for="name">الاسم الكامل:</label>
+        <input type="text" id="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="address">العنوان:</label>
+        <input type="text" id="address" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">رقم الجوال:</label>
+        <input type="tel" id="phone" required>
+      </div>
+
+      <div class="form-group">
+        <label for="notes">ملاحظات إضافية (اختياري):</label>
+        <textarea id="notes" rows="3"></textarea>
+      </div>
+
+      <div class="cart-summary">
+        <h3>🧾 ملخص الطلب:</h3>
+        <ul id="orderSummary"></ul>
+        <p><strong>الإجمالي:</strong> <span id="totalAmount">0</span> ر.س</p>
+      </div>
+
+      <button type="submit" class="btn btn-primary">تأكيد الطلب</button>
+    </form>
+  </main>
+
+  <!-- تذييل -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 جميع الحقوق محفوظة | متجري</p>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const summaryList = document.getElementById("orderSummary");
+    const totalAmount = document.getElementById("totalAmount");
+    const form = document.getElementById("checkoutForm");
+
+    let total = 0;
+    cart.forEach(product => {
+      const li = document.createElement("li");
+      li.textContent = `${product.name} - ${product.price}`;
+      summaryList.appendChild(li);
+
+      total += parseFloat(product.price.replace("ر.س", "").trim());
+    });
+    totalAmount.textContent = total.toFixed(2);
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      alert("✅ تم إرسال طلبك بنجاح! سيتم التواصل معك قريبًا.");
+      localStorage.removeItem("cart");
+      window.location.href = "index.html";
+    });
+  </script>
+
+  <style>
+    .checkout-page {
+      padding: 2rem 0;
+    }
+
+    .checkout-form {
+      background-color: var(--white);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.6rem;
+      border: 1px solid var(--light-gray);
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .cart-summary {
+      margin-top: 2rem;
+    }
+
+    .cart-summary ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1rem;
+    }
+
+    .cart-summary li {
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed var(--light-gray);
+    }
+  </style>
+</body>
+</html>

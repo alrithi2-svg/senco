@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>تفاصيل المنتج | متجري</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- خطوط وملفات CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- رأس الصفحة -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">متجري</a>
+      <nav class="navbar">
+        <a href="index.html">الرئيسية</a>
+        <a href="product.html">المنتجات</a>
+        <a href="cart.html">السلة</a>
+        <a href="checkout.html">الدفع</a>
+      </nav>
+      <div class="cart-icon">🛒</div>
+    </div>
+  </header>
+
+  <!-- تفاصيل المنتج -->
+  <main class="container product-page">
+    <div class="product-layout">
+      <div class="product-image">
+        <img id="productImage" src="" alt="صورة المنتج">
+      </div>
+      <div class="product-details">
+        <h1 class="product-title" id="productName"></h1>
+        <p class="price" id="productPrice"></p>
+        <p class="product-description">
+          منتج عالي الجودة مقدم من متجرنا. المواصفات الكاملة والتفاصيل تجدها داخل العلبة.
+        </p>
+        <button class="btn btn-primary" onclick="addToCart()">أضف إلى السلة</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- تذييل -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 جميع الحقوق محفوظة | متجري</p>
+    </div>
+  </footer>
+
+  <!-- ملف السلة -->
+  <script src="assets/js/cart.js"></script>
+
+  <!-- تحميل بيانات المنتج -->
+  <script>
+    const product = JSON.parse(localStorage.getItem("selectedProduct"));
+
+    if (product) {
+      document.getElementById("productName").textContent = product.name;
+      document.getElementById("productPrice").textContent = product.price;
+      document.getElementById("productImage").src = product.image;
+    } else {
+      // إعادة توجيه إذا لم يوجد منتج
+      window.location.href = "index.html";
+    }
+
+    function addToCart() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push(product);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert("تمت إضافة المنتج إلى السلة ✅");
+    }
+  </script>
+</body>
+</html>

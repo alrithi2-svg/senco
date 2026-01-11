@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>سلة المشتريات | متجري</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- الخطوط والأنماط -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- رأس الصفحة -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">متجري</a>
+      <nav class="navbar">
+        <a href="index.html">الرئيسية</a>
+        <a href="product.html">المنتجات</a>
+        <a href="cart.html">السلة</a>
+        <a href="checkout.html">الدفع</a>
+      </nav>
+      <div class="cart-icon">🛒</div>
+    </div>
+  </header>
+
+  <!-- محتوى السلة -->
+  <main class="container cart-page">
+    <h1>🛒 سلة المشتريات</h1>
+    <div id="cartItems"></div>
+    <div class="cart-summary">
+      <p>المجموع الكلي: <span id="cartTotal">0</span> ر.س</p>
+      <a href="checkout.html" class="btn btn-primary">إتمام الدفع</a>
+    </div>
+  </main>
+
+  <!-- تذييل -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 جميع الحقوق محفوظة | متجري</p>
+    </div>
+  </footer>
+
+  <!-- ملف JS للسلة -->
+  <script>
+    const cartContainer = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function renderCart() {
+      cartContainer.innerHTML = "";
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>سلتك فارغة حاليًا 🛒</p>";
+        document.querySelector(".cart-summary").style.display = "none";
+        return;
+      }
+
+      document.querySelector(".cart-summary").style.display = "block";
+
+      cart.forEach((item, index) => {
+        total += parseFloat(item.price.replace("ر.س", "").trim());
+        const productItem = document.createElement("div");
+        productItem.className = "cart-item";
+        productItem.innerHTML = `
+          <p><strong>${item.name}</strong> - ${item.price}</p>
+          <button onclick="removeItem(${index})" class="btn btn-danger">حذف</button>
+        `;
+        cartContainer.appendChild(productItem);
+      });
+
+      cartTotal.textContent = total.toFixed(2);
+    }
+
+    function removeItem(index) {
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+
+    renderCart();
+  </script>
+
+  <style>
+    .cart-page {
+      padding: 2rem 0;
+    }
+
+    .cart-item {
+      background-color: var(--white);
+      border: 1px solid var(--light-gray);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-summary {
+      text-align: left;
+      margin-top: 2rem;
+    }
+
+    .btn-danger {
+      background-color: #e74c3c;
+      color: #fff;
+      padding: 0.4rem 1rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn-danger:hover {
+      background-color: #c0392b;
+    }
+  </style>
+</body>
+</html>
